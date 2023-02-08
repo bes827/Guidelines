@@ -1,24 +1,27 @@
-<html>
-  <body>
+<body>
     <script>
-      (async () => {
-        const password = prompt("Enter the password:");
-        
-        if (password === "test") {
-          const response = await fetch('https://api.github.com/repos/bes827/pages33321.github.io/contents/');
+      const password = "test";
+      let enteredPassword = prompt("Enter the password:");
+
+      if (enteredPassword === password) {
+        (async () => {
+          const response = await fetch('https://api.github.com/repos/bes827/Guidelines/contents/');
           const data = await response.json();
-          let htmlString = '<ul>';
-        
+          let htmlString = ' <br> <br> <br>  <h2>Guidelines and Relevant Articles&nbsp;</h2> <hr />         ';
+
           for (let file of data) {
-            htmlString += `<li><a href="${file.path}">${file.name}</a></li>`;
+            if (file.name !== 'index.html') {
+              htmlString += `<li><a href="${file.path}" target="_blank">${file.name}</a></li>`;
+            }
           }
 
           htmlString += '</ul>';
           document.getElementsByTagName('body')[0].innerHTML = htmlString;
-        } else {
-          document.getElementsByTagName('body')[0].innerHTML = "Wrong password. Access denied.";
-        }
-      })()
-    </script>
+        })();
+      } else {
+        document.getElementsByTagName('body')[0].innerHTML = "Incorrect password. Please try again.";
+}
+</script>
+
   <body>
 </html>
