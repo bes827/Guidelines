@@ -4,7 +4,7 @@
       (async () => {
         const response = await fetch('https://api.github.com/repos/bes827/Guidelines/contents/');
         const data = await response.json();
-        let htmlString = '  <h2>Guidelines and Relevant Articles&nbsp;</h2> <hr />';
+        let htmlString = ' <br> <br> <br>  <h2>Guidelines and Relevant Articles&nbsp;</h2> <hr />';
         
 for (let file of data) {
     if (file.name !== 'index.html') {
