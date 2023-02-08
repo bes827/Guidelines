@@ -6,9 +6,11 @@
         const data = await response.json();
         let htmlString = '  <h2>Guidelines and relevent articles&nbsp;</h2> <hr />';
         
-        for (let file of data) {
-          htmlString += `<li><a href="${file.path}" target="_blank">${file.name}</a></li>`;
-        }
+for (let file of data) {
+    if (file.name !== 'index.html') {
+      htmlString += `<li><a href="${file.path}">${file.name}</a></li>`;
+    }
+  }
 
         htmlString += '</ul>';
         document.getElementsByTagName('body')[0].innerHTML = htmlString;
