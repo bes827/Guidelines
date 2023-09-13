@@ -7,19 +7,41 @@
       (async () => {
         const response = await fetch('https://api.github.com/repos/bes827/Guidelines/contents/');
         const data = await response.json();
-        let tableString = '<table><thead><tr><th>File Name</th><th>Link</th></tr></thead><tbody>';
+        let tableString = '<table><tbody>';
 
         for (let file of data) {
           if (file.name !== 'index.html') {
-            tableString += `<tr><td>${file.name}</td><td><a href="${file.path}" target="_blank">${file.path}</a></td></tr>`;
+            tableString += `<tr><td><a href="${file.path}" target="_blank">${file.path}</a></td></tr>`;
           }
         }
 
         tableString += '</tbody></table>';
-        document.getElementsByTagName('body')[0].innerHTML = tableString;
+        document.getElementsByTagName('body')[0].innerHTML = `
+          <input type="text" id="searchInput" onkeyup="filterTable()" placeholder="Search for files...">
+          ${tableString}
+        `;
       })();
     } else {
       document.getElementsByTagName('body')[0].innerHTML = "Incorrect password. Please try again.";
+    }
+
+    function filterTable() {
+      let input = document.getElementById("searchInput");
+      let filter = input.value.toUpperCase();
+      let table = document.getElementsByTagName("table")[0];
+      let rows = table.getElementsByTagName("tr");
+
+      for (let i = 0; i < rows.length; i++) {
+        let link = rows[i].getElementsByTagName("a")[0];
+        if (link) {
+          let text = link.textContent || link.innerText;
+          if (text.toUpperCase().indexOf(filter) > -1) {
+            rows[i].style.display = "";
+          } else {
+            rows[i].style.display = "none";
+          }
+        }
+      }
     }
   </script>
 </body>
