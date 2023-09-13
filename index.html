@@ -1,27 +1,25 @@
 <body>
-    <script>
-      const password = "test";
-      let enteredPassword = prompt("Enter the password:");
+  <script>
+    const password = "test";
+    let enteredPassword = prompt("Enter the password:");
 
-      if (enteredPassword === password) {
-        (async () => {
-          const response = await fetch('https://api.github.com/repos/bes827/Guidelines/contents/');
-          const data = await response.json();
-          let htmlString = ' <br> <br> <br>  <h2>Guidelines and Relevant Articles&nbsp;</h2> <hr />         ';
+    if (enteredPassword === password) {
+      (async () => {
+        const response = await fetch('https://api.github.com/repos/bes827/Guidelines/contents/');
+        const data = await response.json();
+        let tableString = '<table><thead><tr><th>File Name</th><th>Link</th></tr></thead><tbody>';
 
-          for (let file of data) {
-            if (file.name !== 'index.html') {
-              htmlString += `<li><a href="${file.path}" target="_blank">${file.name}</a></li>`;
-            }
+        for (let file of data) {
+          if (file.name !== 'index.html') {
+            tableString += `<tr><td>${file.name}</td><td><a href="${file.path}" target="_blank">${file.path}</a></td></tr>`;
           }
+        }
 
-          htmlString += '</ul>';
-          document.getElementsByTagName('body')[0].innerHTML = htmlString;
-        })();
-      } else {
-        document.getElementsByTagName('body')[0].innerHTML = "Incorrect password. Please try again.";
-}
-</script>
-
-  <body>
-</html>
+        tableString += '</tbody></table>';
+        document.getElementsByTagName('body')[0].innerHTML = tableString;
+      })();
+    } else {
+      document.getElementsByTagName('body')[0].innerHTML = "Incorrect password. Please try again.";
+    }
+  </script>
+</body>
