@@ -19,9 +19,6 @@
         let uploadLink = '<a href="0_upload.html" target="_blank"><h3>UPLOAD</h3></a>';
         document.getElementsByTagName('body')[0].innerHTML = `
           <div class="header">
-            <div class="logo">
-              <img src="https://www.ncbi.nlm.nih.gov/corehtml/pmc/pmcgifs/pubmed-pmc-logo.png" alt="PubMed Central logo">
-            </div>
             <div class="search">
               <input type="text" id="searchInput" onkeyup="filterTable()" placeholder="Search for files...">
             </div>
@@ -72,15 +69,11 @@
     }
 
     .header {
-      background-color: #fff;
+      background-color: #0072c6;
       border-bottom: 1px solid #ddd;
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       padding: 10px 20px;
-    }
-
-    .logo img {
-      height: 50px;
     }
 
     .search input[type="text"] {
